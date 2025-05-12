@@ -1,0 +1,11 @@
+use [AuthenticationDB]
+
+CREATE TABLE People (
+    Id UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
+    Username VARCHAR(50) NOT NULL,
+    Email VARCHAR(50) NOT NULL,
+    HashPassword VARCHAR(255) NOT NULL,
+    RoleId INT NOT NULL
+    
+    FOREIGN KEY (RoleId) REFERENCES Role(Id)
+);
