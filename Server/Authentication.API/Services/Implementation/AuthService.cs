@@ -1,6 +1,8 @@
-﻿namespace Authentication.API.Services.Implementation
+﻿using Authentication.API.Services.Interfaces;
+
+namespace Authentication.API.Services.Implementation
 {
-    public class AuthService
+    public class AuthService : IAuthService
     {
     }
 }

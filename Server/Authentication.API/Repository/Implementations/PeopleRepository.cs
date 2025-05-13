@@ -1,6 +1,7 @@
 ﻿using Authentication.API.Data;
 using Authentication.API.Models.Domain;
 using Authentication.API.Repository.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace Authentication.API.Repository.Implementations
 {
@@ -14,24 +15,30 @@ namespace Authentication.API.Repository.Implementations
             await _context.SaveChangesAsync();
         }
 
-        public Task DeleteUserAsync(Guid id)
+        public async Task DeleteUserAsync(Guid id)
         {
-            throw new NotImplementedException();
+            var user = await _context.People.FirstOrDefaultAsync(x => x.Id == id);
+            if (user != null)
+            {
+                _context.People.Remove(user);
+                await _context.SaveChangesAsync();
+            }
         }
 
-        public Task<List<Person>> GetAllUsersAsync()
+        public async Task<List<Person>> GetAllUsersAsync()
         {
-            throw new NotImplementedException();
+            return await _context.People.ToListAsync();
         }
 
-        public Task<Person> GetUserByIdAsync(Guid id)
+        public async Task<Person?> GetUserByIdAsync(Guid id)
         {
-            throw new NotImplementedException();
+            return await _context.People.FirstOrDefaultAsync(x => x.Id == id);
         }
 
-        public Task UpdateUserAsync(Person person)
+        public async Task UpdateUserAsync(Person person)
         {
-            throw new NotImplementedException();
+            _context.People.Update(person);
+            await _context.SaveChangesAsync();
         }
     }
 }
