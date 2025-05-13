@@ -34,6 +34,14 @@ namespace Authentication.API.Repository.Implementations
         {
             return await _context.People.FirstOrDefaultAsync(x => x.Id == id);
         }
+        public async Task<Person?> GetUserByEmailAsync(string email)
+        {
+            return await _context.People.FirstOrDefaultAsync(x => x.Email == email);
+        }
+        public async Task<Person?> GetUserByUsernameAsync(string username)
+        {
+            return await _context.People.FirstOrDefaultAsync(x => x.Username == username);
+        }
 
         public async Task UpdateUserAsync(Person person)
         {
