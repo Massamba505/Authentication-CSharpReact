@@ -18,7 +18,7 @@ namespace Authentication.API.Repository.Implementations
         public async Task DeleteUserAsync(Guid id)
         {
             var user = await _context.People.FirstOrDefaultAsync(x => x.Id == id);
-            if (user != null)
+            if (user is not null)
             {
                 _context.People.Remove(user);
                 await _context.SaveChangesAsync();
